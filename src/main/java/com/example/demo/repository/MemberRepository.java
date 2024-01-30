@@ -13,6 +13,15 @@ public interface MemberRepository {
 			FROM `member`
 			WHERE loginId = #{loginId}
 			""")
+	
+	@Select("""
+			SELECT *
+			FROM `member`
+			WHERE name = #{name} 
+			AND email = #{email}
+			""")
+	public Member getMemberByNameAndEmail(String name, String email);
+	
 	public Member getMemberByLoginId(String loginId);
 	@Insert("""
 			INSERT INTO
