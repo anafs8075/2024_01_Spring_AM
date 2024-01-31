@@ -40,7 +40,6 @@ SET regDate = NOW(),
 updateDate = NOW(),
 title = '제목3',
 `body` = '내용3';
-
 # member TD 생성
 # (관리자)
 INSERT INTO `member`
@@ -53,7 +52,6 @@ loginPw = 'admin',
 nickname = '관리자',
 cellphoneNum = '01012341234',
 email = 'abcd@gmail.com';
-
 # (일반)
 INSERT INTO `member`
 SET regDate = NOW(),
@@ -64,7 +62,6 @@ loginPw = 'test1',
 nickname = '회원1',
 cellphoneNum = '01043214321',
 email = 'abcde@gmail.com';
-
 # (일반)
 INSERT INTO `member`
 SET regDate = NOW(),
@@ -75,7 +72,19 @@ loginPw = 'test2',
 nickname = '회원2',
 cellphoneNum = '01056785678',
 email = 'abcdef@gmail.com';
+
+ALTER TABLE article ADD COLUMN memberId INT(10) UNSIGNED NOT NULL AFTER updateDate;
+
+UPDATE article
+SET memberId = 2
+WHERE id IN (1,2);
+
+UPDATE article
+SET memberId = 3
+WHERE id = 3;
+
 ###############################################
+
 SHOW FULL COLUMNS FROM `member`;
 DESC `member`;
 SELECT *
