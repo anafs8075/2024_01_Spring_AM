@@ -22,10 +22,10 @@ public interface ArticleRepository {
 			""")
 	public void writeArticle(int memberId, String title, String body);
 
-//	@Select("SELECT LAST_INSERT_ID()")
+	@Select("SELECT LAST_INSERT_ID()")
 	public int getLastInsertId();
 
-	@Select("SELECT * FROM article WHERE id = #{id}")
+//	@Select("SELECT * FROM article WHERE id = #{id}")
 	public Article getArticle(int id);
 
 	@Delete("DELETE FROM article WHERE id = #{id}")
@@ -36,4 +36,5 @@ public interface ArticleRepository {
 
 //	@Select("SELECT * FROM article ORDER BY id DESC")
 	public List<Article> getArticles();
+
 }

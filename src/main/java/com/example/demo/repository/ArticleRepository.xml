@@ -8,6 +8,7 @@
 		FROM article 
 		ORDER BY id DESC
 	</select>
+	
 	<update id="modifyArticle">
 		UPDATE article 
 		<set>
@@ -17,10 +18,12 @@
 		</set> 
 		WHERE id = #{id}
 	</update>
-
+	
 	<select id="getArticle" resultType="Article">
 		SELECT * 
 		FROM article 
 		WHERE id = #{id}
 	</select>
+	
+	
 </mapper>

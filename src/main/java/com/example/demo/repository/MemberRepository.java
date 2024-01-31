@@ -13,7 +13,8 @@ public interface MemberRepository {
 			FROM `member`
 			WHERE loginId = #{loginId}
 			""")
-	
+	public Member getMemberByLoginId(String loginId);
+
 	@Select("""
 			SELECT *
 			FROM `member`
@@ -21,8 +22,7 @@ public interface MemberRepository {
 			AND email = #{email}
 			""")
 	public Member getMemberByNameAndEmail(String name, String email);
-	
-	public Member getMemberByLoginId(String loginId);
+
 	@Insert("""
 			INSERT INTO
 			`member` SET
@@ -39,12 +39,8 @@ public interface MemberRepository {
 
 	@Select("SELECT LAST_INSERT_ID()")
 	public int getLastInsertId();
-	
+
 	@Select("SELECT * FROM `member` WHERE id = #{id}")
 	public Member getMember(int id);
-	
-	
-	
-	
-	
+
 }
