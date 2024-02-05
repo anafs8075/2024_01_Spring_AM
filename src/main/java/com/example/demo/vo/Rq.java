@@ -1,19 +1,17 @@
 package com.example.demo.vo;
-
 import java.io.IOException;
-
 import com.example.demo.util.Ut;
-
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import jakarta.servlet.http.HttpSession;
 import lombok.Getter;
-
 public class Rq {
 	@Getter
 	private boolean isLogined;
 	@Getter
 	private int loginedMemberId;
+
+	private HttpSession session;
 
 	private HttpServletRequest req;
 	private HttpServletResponse resp;
@@ -21,6 +19,8 @@ public class Rq {
 	public Rq(HttpServletRequest req, HttpServletResponse resp) {
 		this.req = req;
 		this.resp = resp;
+		this.session = req.getSession();
+		
 		HttpSession httpSession = req.getSession();
 
 		if (httpSession.getAttribute("loginedMemberId") != null) {
@@ -51,4 +51,11 @@ public class Rq {
 		}
 	}
 
+	public void logout() {
+		session.removeAttribute("loginedMemberId");
+	}
+
+	public void login(Member member) {
+		session.setAttribute("loginedMemberId", member.getId());
+	}
 }
