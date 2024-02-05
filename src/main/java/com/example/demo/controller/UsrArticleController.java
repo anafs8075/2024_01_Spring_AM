@@ -9,8 +9,10 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.example.demo.service.ArticleService;
+import com.example.demo.service.BoardService;
 import com.example.demo.util.Ut;
 import com.example.demo.vo.Article;
+import com.example.demo.vo.Board;
 import com.example.demo.vo.ResultData;
 import com.example.demo.vo.Rq;
 
@@ -24,6 +26,9 @@ public class UsrArticleController {
 
 	@Autowired
 	private ArticleService articleService;
+	
+	@Autowired
+	private BoardService boardService;
 
 	public UsrArticleController() {
 
@@ -31,6 +36,19 @@ public class UsrArticleController {
 
 	// 액션 메서드
 
+	@RequestMapping("/usr/article/list")
+	public String showList(HttpServletRequest req, Model model, int boardId) {
+
+		Board board = boardService.getBoardById(boardId);
+
+		List<Article> articles = articleService.getArticles();
+
+		model.addAttribute("board", board);
+		model.addAttribute("articles", articles);
+
+		return "usr/article/list";
+	}
+	
 	@RequestMapping("/usr/article/detail")
 	public String showDetail(HttpServletRequest req, Model model, int id) {
 		Rq rq = (Rq) req.getAttribute("rq");
@@ -42,14 +60,6 @@ public class UsrArticleController {
 		return "usr/article/detail";
 	}
 
-	@RequestMapping("/usr/article/list")
-	public String showList(Model model) {
-		List<Article> articles = articleService.getArticles();
-
-		model.addAttribute("articles", articles);
-
-		return "usr/article/list";
-	}
 
 	
 	@RequestMapping("/usr/article/write")
