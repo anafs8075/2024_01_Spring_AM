@@ -18,7 +18,7 @@
 </head>
 <body>
 	<header>
-	<div class="h-20 flex mx-auto items-center text-3xl">
+		<div class="h-20 flex mx-auto items-center text-3xl">
 			<a href="/">LOGO</a>
 			<div class="flex-grow"></div>
 			<ul class="flex">
@@ -32,7 +32,6 @@
 					<li><a onclick="if(confirm('로그아웃 할래?') == false) return false;" class="hover:underline"
 							href="../member/doLogout">LOGOUT</a></li>
 				</c:if>
-				
 			</ul>
 		</div>
 	</header>
