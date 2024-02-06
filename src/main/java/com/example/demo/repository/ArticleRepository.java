@@ -32,7 +32,7 @@ public interface ArticleRepository {
 			WHERE id = #{id}
 			""")
 	public Article getArticle(int id);
-	
+
 	@Select("""
 			SELECT A.*, M.nickname AS extra__writer
 			FROM article AS A
@@ -41,7 +41,6 @@ public interface ArticleRepository {
 			WHERE A.id = #{id}
 				""")
 	public Article getForPrintArticle(int id);
-
 
 	@Delete("DELETE FROM article WHERE id = #{id}")
 	public void deleteArticle(int id);
@@ -65,7 +64,7 @@ public interface ArticleRepository {
 			ORDER BY A.id DESC
 			""")
 	public List<Article> getArticles();
-	
+
 	@Select("""
 			SELECT A.*, M.nickname AS extra__writer
 			FROM article AS A
