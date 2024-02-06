@@ -64,15 +64,53 @@ public interface ArticleRepository {
 			ORDER BY A.id DESC
 			""")
 	public List<Article> getArticles();
+	
+	
 
-	@Select("""
-			SELECT A.*, M.nickname AS extra__writer
-			FROM article AS A
-			INNER JOIN `member` AS M
-			ON A.memberId = M.id
-			WHERE boardId = #{boardId}
-			ORDER BY A.id DESC
-			""")
-	public List<Article> getForPrintArticles(int boardId);
+//	@Select("""
+//	<script>
+//	SELECT A.*, M.nickname AS extra__writer
+//	FROM article AS A
+//	INNER JOIN `member` AS M
+//	ON A.memberId = M.id
+//	WHERE 1
+//	<if test="boardId != 0">
+//		AND A.boardId = #{boardId}
+//	</if>
+//	ORDER BY A.id DESC
+//	</script>
+//	""")
+//public List<Article> getForPrintArticles(int boardId);
+
+@Select("""
+	<script>
+	SELECT COUNT(*) AS cnt
+	FROM article
+	WHERE 1
+	<if test="boardId != 0">
+		AND boardId = #{boardId}
+	</if>
+	ORDER BY id DESC
+	</script>
+	""")
+public int getArticlesCount(int boardId);
+
+@Select("""
+	<script>
+	SELECT A.*, M.nickname AS extra__writer
+	FROM article AS A
+	INNER JOIN `member` AS M
+	ON A.memberId = M.id
+	WHERE 1
+	<if test="boardId != 0">
+		AND A.boardId = #{boardId}
+	</if>
+	ORDER BY A.id DESC
+	<if test="limitFrom >= 0 ">
+		LIMIT #{limitFrom}, #{limitTake}
+	</if>
+	</script>
+	""")
+public List<Article> getForPrintArticles(int boardId, int limitFrom, int limitTake);
 
 }
