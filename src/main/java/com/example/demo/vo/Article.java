@@ -15,10 +15,9 @@ public class Article {
 	private String title;
 	private String body;
 	private int hitCount;
-	
+
 	private String extra__writer;
-	
+
 	private boolean userCanModify;
 	private boolean userCanDelete;
-
 }

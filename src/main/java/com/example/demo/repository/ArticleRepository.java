@@ -64,33 +64,31 @@ public interface ArticleRepository {
 			ORDER BY A.id DESC
 			""")
 	public List<Article> getArticles();
-	
-	
 
 //	@Select("""
-//	<script>
-//	SELECT A.*, M.nickname AS extra__writer
-//	FROM article AS A
-//	INNER JOIN `member` AS M
-//	ON A.memberId = M.id
-//	WHERE 1
-//	<if test="boardId != 0">
-//		AND A.boardId = #{boardId}
-//	</if>
-//	ORDER BY A.id DESC
-//	</script>
-//	""")
-//public List<Article> getForPrintArticles(int boardId);
+//			<script>
+//			SELECT A.*, M.nickname AS extra__writer
+//			FROM article AS A
+//			INNER JOIN `member` AS M
+//			ON A.memberId = M.id
+//			WHERE 1
+//			<if test="boardId != 0">
+//				AND A.boardId = #{boardId}
+//			</if>
+//			ORDER BY A.id DESC
+//			</script>
+//			""")
+//	public List<Article> getForPrintArticles(int boardId);
 
-@Select("""
-	<script>
-	SELECT COUNT(*) AS cnt
-	FROM article AS A
-	WHERE 1
-	<if test="boardId != 0">
-		AND boardId = #{boardId}
-	</if>
-	<if test="searchKeyword != ''">
+	@Select("""
+			<script>
+			SELECT COUNT(*) AS cnt
+			FROM article AS A
+			WHERE 1
+			<if test="boardId != 0">
+				AND boardId = #{boardId}
+			</if>
+			<if test="searchKeyword != ''">
 				<choose>
 					<when test="searchKeywordTypeCode == 'title'">
 						AND A.title LIKE CONCAT('%',#{searchKeyword},'%')
@@ -104,37 +102,36 @@ public interface ArticleRepository {
 					</otherwise>
 				</choose>
 			</if>
-	ORDER BY id DESC
-	</script>
-	""")
-public int getArticlesCount(int boardId, String searchKeywordTypeCode, String searchKeyword);
+			ORDER BY id DESC
+			</script>
+			""")
+	public int getArticlesCount(int boardId, String searchKeywordTypeCode, String searchKeyword);
 
-@Update("""
-		UPDATE article
-		SET hitCount = hitCount + 1
-		WHERE id = #{id}
-		""")
-public int increaseHitCount(int id);
+	@Update("""
+			UPDATE article
+			SET hitCount = hitCount + 1
+			WHERE id = #{id}
+			""")
+	public int increaseHitCount(int id);
 
+	@Select("""
+			SELECT hitCount
+			FROM article
+			WHERE id = #{id}
+			""")
+	public int getArticleHitCount(int id);
 
-@Select("""
-		SELECT hitCount
-		FROM article
-		WHERE id = #{id}
-		""")
-public int getArticleHitCount(int id);
-
-@Select("""
-	<script>
-	SELECT A.*, M.nickname AS extra__writer
-	FROM article AS A
-	INNER JOIN `member` AS M
-	ON A.memberId = M.id
-	WHERE 1
-	<if test="boardId != 0">
-		AND A.boardId = #{boardId}
-	</if>
-	<if test="searchKeyword != ''">
+	@Select("""
+			<script>
+			SELECT A.*, M.nickname AS extra__writer
+			FROM article AS A
+			INNER JOIN `member` AS M
+			ON A.memberId = M.id
+			WHERE 1
+			<if test="boardId != 0">
+				AND A.boardId = #{boardId}
+			</if>
+			<if test="searchKeyword != ''">
 				<choose>
 					<when test="searchKeywordTypeCode == 'title'">
 						AND A.title LIKE CONCAT('%',#{searchKeyword},'%')
@@ -148,13 +145,13 @@ public int getArticleHitCount(int id);
 					</otherwise>
 				</choose>
 			</if>
-	ORDER BY A.id DESC
-	<if test="limitFrom >= 0 ">
-		LIMIT #{limitFrom}, #{limitTake}
-	</if>
-	</script>
-	""")
-public List<Article> getForPrintArticles(int boardId, int limitFrom, int limitTake, String searchKeywordTypeCode,
-		String searchKeyword);
+			ORDER BY A.id DESC
+			<if test="limitFrom >= 0 ">
+				LIMIT #{limitFrom}, #{limitTake}
+			</if>
+			</script>
+			""")
+	public List<Article> getForPrintArticles(int boardId, int limitFrom, int limitTake, String searchKeywordTypeCode,
+			String searchKeyword);
 
 }

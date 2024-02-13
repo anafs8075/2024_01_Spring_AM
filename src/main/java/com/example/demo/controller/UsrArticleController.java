@@ -52,18 +52,16 @@ public class UsrArticleController {
 		if (board == null) {
 			return rq.historyBackOnView("없는 게시판이야");
 		}
-		
-		
+
 		// 한페이지에 글 10개씩이야
-				// 글 20개 -> 2 page
-				// 글 24개 -> 3 page
+		// 글 20개 -> 2 page
+		// 글 24개 -> 3 page
 		int itemsInAPage = 10;
 
 		int pagesCount = (int) Math.ceil(articlesCount / (double) itemsInAPage);
-		
+
 		List<Article> articles = articleService.getForPrintArticles(boardId, itemsInAPage, page, searchKeywordTypeCode,
 				searchKeyword);
-
 
 		model.addAttribute("board", board);
 		model.addAttribute("boardId", boardId);
@@ -80,7 +78,7 @@ public class UsrArticleController {
 	@RequestMapping("/usr/article/detail")
 	public String showDetail(HttpServletRequest req, Model model, int id) {
 		Rq rq = (Rq) req.getAttribute("rq");
-		
+
 		Article article = articleService.getForPrintArticle(rq.getLoginedMemberId(), id);
 
 		model.addAttribute("article", article);
@@ -92,7 +90,6 @@ public class UsrArticleController {
 	@ResponseBody
 	public ResultData doIncreaseHitCountRd(int id) {
 
-		
 		ResultData increaseHitCountRd = articleService.increaseHitCount(id);
 
 		if (increaseHitCountRd.isFail()) {

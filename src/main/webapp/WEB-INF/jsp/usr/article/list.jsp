@@ -6,7 +6,7 @@
 
 <section class="mt-8 text-xl px-4">
 	<div class="mx-auto overflow-x-auto">
-			<div class="mb-4 flex">
+		<div class="mb-4 flex">
 			<div class="badge badge-outline">${articlesCount }개</div>
 			<div class="flex-grow"></div>
 			<form action="">
@@ -41,7 +41,7 @@
 		</thead>
 		<tbody>
 
-				<c:forEach var="article" items="${articles }">
+			<c:forEach var="article" items="${articles }">
 				<tr class="hover">
 					<td>${article.id }</td>
 					<td>${article.regDate.substring(0,10) }</td>
@@ -53,6 +53,7 @@
 		</tbody>
 	</table>
 	</div>
+
 	<!-- 	동적 페이징 -->
 	<div class="pagination flex justify-center mt-3">
 		<c:set var="paginationLen" value="3" />
@@ -62,7 +63,7 @@
 		<c:set var="baseUri" value="?boardId=${boardId }" />
 		<c:set var="baseUri" value="${baseUri }&searchKeywordTypeCode=${searchKeywordTypeCode}" />
 		<c:set var="baseUri" value="${baseUri }&searchKeyword=${searchKeyword}" />
-		
+
 		<c:if test="${startPage > 1 }">
 			<a class="btn btn-sm" href="${baseUri }&page=1">1</a>
 			<button class="btn btn-sm btn-disabled">...</button>
@@ -85,18 +86,6 @@
 			<c:forEach begin="1" end="${pagesCount }" var="i">
 				<a class="btn btn-sm ${param.page == i ? 'btn-active' : '' }" href="?page=${i }&boardId=${param.boardId}">${i }</a>
 			</c:forEach>
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
 		</div>
 	</div>
 </section>

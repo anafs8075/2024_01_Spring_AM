@@ -90,7 +90,6 @@ public class ArticleService {
 //		return articleRepository.getForPrintArticles(boardId);
 //	}
 
-	
 	public ResultData increaseHitCount(int id) {
 		int affectedRow = articleRepository.increaseHitCount(id);
 
@@ -99,12 +98,13 @@ public class ArticleService {
 		}
 
 		return ResultData.from("S-1", "해당 게시물 조회수 증가", "id", id);
+
 	}
-	
+
 	public Object getArticleHitCount(int id) {
 		return articleRepository.getArticleHitCount(id);
 	}
-	
+
 	public List<Article> getForPrintArticles(int boardId, int itemsInAPage, int page, String searchKeywordTypeCode,
 			String searchKeyword) {
 
@@ -116,6 +116,6 @@ public class ArticleService {
 
 		return articleRepository.getForPrintArticles(boardId, limitFrom, limitTake, searchKeywordTypeCode,
 				searchKeyword);
-
 	}
+
 }

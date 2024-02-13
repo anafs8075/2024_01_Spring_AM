@@ -3,7 +3,6 @@
 <c:set var="pageTitle" value="ARTICLE DETAIL"></c:set>
 <%@ include file="../common/head.jspf"%>
 
-
 <!-- <iframe src="http://localhost:8081/usr/article/doIncreaseHitCountRd?id=372" frameborder="0"></iframe> -->
 <script>
 	const params = {};
@@ -12,6 +11,12 @@
 
 <script>
 	function ArticleDetail__doIncreaseHitCount() {
+		const localStorageKey = 'article__' + params.id + '__alreadyView';
+		if (localStorage.getItem(localStorageKey)) {
+			return;
+		}
+		localStorage.setItem(localStorageKey, true);
+		
 		$.get('../article/doIncreaseHitCountRd', {
 			id : params.id,
 			ajaxMode : 'Y'
@@ -19,12 +24,12 @@
 			$('.article-detail__hit-count').empty().html(data.data1);
 		}, 'json');
 	}
+
 	$(function() {
-// 		ArticleDetail__doIncreaseHitCount();
+		// 		ArticleDetail__doIncreaseHitCount();
 		setTimeout(ArticleDetail__doIncreaseHitCount, 2000);
 	})
 </script>
-
 
 <section class="mt-8 text-xl px-4">
 	<div class="mx-auto">
