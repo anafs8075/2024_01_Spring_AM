@@ -109,6 +109,13 @@ public interface ArticleRepository {
 	""")
 public int getArticlesCount(int boardId, String searchKeywordTypeCode, String searchKeyword);
 
+@Update("""
+		UPDATE article
+		SET hitCount = hitCount + 1
+		WHERE id = #{id}
+		""")
+public void increaseHitCount(int id);
+
 @Select("""
 	<script>
 	SELECT A.*, M.nickname AS extra__writer
@@ -139,6 +146,7 @@ public int getArticlesCount(int boardId, String searchKeywordTypeCode, String se
 	</if>
 	</script>
 	""")
-public List<Article> getForPrintArticles(int boardId, int limitFrom, int limitTake, String searchKeywordTypeCode, String searchKeyword);
+public List<Article> getForPrintArticles(int boardId, int limitFrom, int limitTake, String searchKeywordTypeCode,
+		String searchKeyword);
 
 }
