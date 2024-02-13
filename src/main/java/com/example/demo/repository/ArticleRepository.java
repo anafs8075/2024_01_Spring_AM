@@ -116,6 +116,14 @@ public int getArticlesCount(int boardId, String searchKeywordTypeCode, String se
 		""")
 public int increaseHitCount(int id);
 
+
+@Select("""
+		SELECT hitCount
+		FROM article
+		WHERE id = #{id}
+		""")
+public int getArticleHitCount(int id);
+
 @Select("""
 	<script>
 	SELECT A.*, M.nickname AS extra__writer
