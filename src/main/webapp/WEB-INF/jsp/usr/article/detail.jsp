@@ -4,6 +4,8 @@
 <%@ include file="../common/head.jspf"%>
 
 <!-- <iframe src="http://localhost:8081/usr/article/doIncreaseHitCountRd?id=372" frameborder="0"></iframe> -->
+
+
 <script>
 	const params = {};
 	params.id = parseInt('${param.id}');
@@ -12,11 +14,13 @@
 <script>
 	function ArticleDetail__doIncreaseHitCount() {
 		const localStorageKey = 'article__' + params.id + '__alreadyView';
+
 		if (localStorage.getItem(localStorageKey)) {
 			return;
 		}
+
 		localStorage.setItem(localStorageKey, true);
-		
+
 		$.get('../article/doIncreaseHitCountRd', {
 			id : params.id,
 			ajaxMode : 'Y'
@@ -61,14 +65,19 @@
 				</tr>
 				<tr>
 					<th>추천 ${usersReaction }</th>
-					<td><a
-							href="/usr/reactionPoint/doGoodReaction?relTypeCode=article&relId=${param.id }&replaceUri=${rq.currentUri}"
-							class="reaction btn btn-outline btn-success">좋아요</a> &nbsp;&nbsp; <a href="/usr/reactionPoint/doBadReaction"
-							class="reaction btn btn-outline btn-error">싫어요</a></td>
+					<td>
+						<a href="/usr/reactionPoint/doGoodReaction?relTypeCode=article&relId=${param.id }&replaceUri=${rq.currentUri}"
+							class="reaction btn btn-outline btn-success">좋아요</a>
+						&nbsp;&nbsp;
+						<a href="/usr/reactionPoint/doBadReaction?relTypeCode=article&relId=${param.id }&replaceUri=${rq.currentUri}"
+							class="reaction btn btn-outline btn-error">싫어요</a>
+					</td>
 				</tr>
 				<tr>
 					<th>조회수</th>
-					<td><span class="article-detail__hit-count">${article.hitCount }</span></td>
+					<td>
+						<span class="article-detail__hit-count">${article.hitCount }</span>
+					</td>
 				</tr>
 				<tr>
 					<th>제목</th>
@@ -78,6 +87,7 @@
 					<th>내용</th>
 					<td>${article.body }</td>
 				</tr>
+
 			</tbody>
 		</table>
 		<div class="btns mt-5">
