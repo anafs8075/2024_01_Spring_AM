@@ -127,7 +127,7 @@ public class ArticleService {
 
 		return ResultData.from("S-1", "좋아요 증가", "affectedRow", affectedRow);
 	}
-
+	
 	public ResultData increaseBadReactionPoint(int relId) {
 		int affectedRow = articleRepository.increaseBadReactionPoint(relId);
 

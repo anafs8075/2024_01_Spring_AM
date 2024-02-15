@@ -110,4 +110,5 @@ public class ReactionPointService {
 
 		return false;
 	}
+
 }

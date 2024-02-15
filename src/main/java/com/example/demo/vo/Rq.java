@@ -1,4 +1,5 @@
 package com.example.demo.vo;
+
 import java.io.IOException;
 
 import org.springframework.context.annotation.Scope;
@@ -29,16 +30,17 @@ public class Rq {
 		this.req = req;
 		this.resp = resp;
 		this.session = req.getSession();
-		
+
 		HttpSession httpSession = req.getSession();
 
 		if (httpSession.getAttribute("loginedMemberId") != null) {
 			isLogined = true;
 			loginedMemberId = (int) httpSession.getAttribute("loginedMemberId");
 		}
-		
+
 		this.req.setAttribute("rq", this);
 	}
+
 	public void printHistoryBack(String msg) throws IOException {
 		resp.setContentType("text/html; charset=UTF-8");
 		println("<script>");
@@ -69,17 +71,17 @@ public class Rq {
 	public void login(Member member) {
 		session.setAttribute("loginedMemberId", member.getId());
 	}
-	
+
 	public void initBeforeActionInterceptor() {
 
 	}
-	
+
 	public String historyBackOnView(String msg) {
 		req.setAttribute("msg", msg);
 		req.setAttribute("historyBack", true);
 		return "usr/common/js";
 	}
-	
+
 	public String getCurrentUri() {
 		String currentUri = req.getRequestURI();
 		String queryString = req.getQueryString();
@@ -94,6 +96,6 @@ public class Rq {
 		System.out.println(currentUri);
 
 		return currentUri;
-
 	}
+
 }

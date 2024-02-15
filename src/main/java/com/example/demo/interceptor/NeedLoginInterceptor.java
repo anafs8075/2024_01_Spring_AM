@@ -11,7 +11,6 @@ import jakarta.servlet.http.HttpServletResponse;
 
 @Component
 public class NeedLoginInterceptor implements HandlerInterceptor {
-	
 	@Autowired
 	private Rq rq;
 

@@ -32,6 +32,7 @@ public class Ut {
 
 		return false;
 	}
+
 	public static String jsHistoryBack(String resultCode, String msg) {
 		if (resultCode == null) {
 			resultCode = "";
