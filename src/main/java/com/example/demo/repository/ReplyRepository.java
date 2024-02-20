@@ -2,6 +2,7 @@ package com.example.demo.repository;
 
 import java.util.List;
 
+import org.apache.ibatis.annotations.Insert;
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Select;
 
@@ -21,4 +22,18 @@ public interface ReplyRepository {
 			""")
 	List<Reply> getForPrintReplies(int loginedMemberId, String relTypeCode, int relId);
 
+	@Insert("""
+			INSERT INTO reply
+			SET regDate = NOW(),
+			updateDate = NOW(),
+			memberId = #{loginedMemberId},
+			relTypeCode = #{relTypeCode},
+			relId = #{relId},
+			`body` = #{body}
+		""")
+void writeReply(int loginedMemberId, String relTypeCode, int relId, String body);
+
+@Select("SELECT LAST_INSERT_ID()")
+public int getLastInsertId();
+	
 }
