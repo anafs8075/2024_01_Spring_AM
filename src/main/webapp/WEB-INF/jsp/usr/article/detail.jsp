@@ -233,6 +233,13 @@
 	</div>
 </section>
 
+<section class="mt-5 px-3">
+	<div class="mx-auto">
+		<h2>댓글 리스트(${repliesCount })</h2>
+		<div>${replies }</div>
+	</div>
+</section>
+
 
 
 <%@ include file="../common/foot.jspf"%>
