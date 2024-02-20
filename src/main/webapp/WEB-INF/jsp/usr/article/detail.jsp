@@ -60,6 +60,11 @@
 			data: {relTypeCode: 'article', relId: articleId},
 			dataType: 'json',
 			success: function(data){
+				console.log(data);
+				console.log('data.data1Name : ' + data.data1Name);
+				console.log('data.data1 : ' + data.data1);
+				console.log('data.data2Name : ' + data.data2Name);
+				console.log('data.data2 : ' + data.data2);
 				if(data.resultCode.startsWith('S-')){
 					var likeButton = $('#likeButton');
 					var likeCount = $('#likeCount');
@@ -68,26 +73,15 @@
 					
 					if(data.resultCode == 'S-1'){
 						likeButton.toggleClass('btn-outline');
-						likeCount.text(parseInt(likeCount.text()) + 1);
-						console.log(1);
-						console.log('likeCount.text() : ' + likeCount.text());
-						console.log('DislikeCount.text() : ' + DislikeCount.text());
+						likeCount.text(data.data1);
 					}else if(data.resultCode == 'S-2'){
 						DislikeButton.toggleClass('btn-outline');
-						DislikeCount.text(parseInt(DislikeCount.text()) - 1);
-						console.log('likeCount.text() : ' + likeCount.text());
-						console.log('DislikeCount.text() : ' + DislikeCount.text());
+						DislikeCount.text(data.data2);
 						likeButton.toggleClass('btn-outline');
-						likeCount.text(parseInt(likeCount.text()) + 1);
-						console.log(2);
-						console.log('likeCount.text() : ' + likeCount.text());
-						console.log('DislikeCount.text() : ' + DislikeCount.text());
+						likeCount.text(data.data1);
 					}else {
 						likeButton.toggleClass('btn-outline');
-						likeCount.text(parseInt(likeCount.text()) + 1);
-						console.log(3);
-						console.log('likeCount.text() : ' + likeCount.text());
-						console.log('DislikeCount.text() : ' + DislikeCount.text());
+						likeCount.text(data.data1);
 					}
 					
 				}else {
@@ -113,6 +107,11 @@
 			data: {relTypeCode: 'article', relId: articleId},
 			dataType: 'json',
 			success: function(data){
+				console.log(data);
+				console.log('data.data1Name : ' + data.data1Name);
+				console.log('data.data1 : ' + data.data1);
+				console.log('data.data2Name : ' + data.data2Name);
+				console.log('data.data2 : ' + data.data2);
 				if(data.resultCode.startsWith('S-')){
 					var likeButton = $('#likeButton');
 					var likeCount = $('#likeCount');
@@ -121,26 +120,15 @@
 					
 					if(data.resultCode == 'S-1'){
 						DislikeButton.toggleClass('btn-outline');
-						DislikeCount.text(parseInt(DislikeCount.text()) + 1);
-						console.log(4);
-						console.log('likeCount.text() : ' + likeCount.text());
-						console.log('DislikeCount.text() : ' + DislikeCount.text());
+						DislikeCount.text(data.data2);
 					}else if(data.resultCode == 'S-2'){
 						likeButton.toggleClass('btn-outline');
-						likeCount.text(parseInt(likeCount.text()) - 1);
-						console.log('likeCount.text() : ' + likeCount.text());
-						console.log('DislikeCount.text() : ' + DislikeCount.text());
+						likeCount.text(data.data1);
 						DislikeButton.toggleClass('btn-outline');
-						DislikeCount.text(parseInt(DislikeCount.text()) + 1);
-						console.log(5);
-						console.log('likeCount.text() : ' + likeCount.text());
-						console.log('DislikeCount.text() : ' + DislikeCount.text());
+						DislikeCount.text(data.data2);
 					}else {
 						DislikeButton.toggleClass('btn-outline');
-						DislikeCount.text(parseInt(DislikeCount.text()) + 1);
-						console.log(6);
-						console.log('likeCount.text() : ' + likeCount.text());
-						console.log('DislikeCount.text() : ' + DislikeCount.text());
+						DislikeCount.text(data.data2);
 					}
 			
 				}else {
@@ -166,7 +154,7 @@
 			<tbody>
 				<tr>
 					<th>번호</th>
-					<td>${article.id }</td>
+					<td>${article.id }${goodRP}${badRP}</td>
 				</tr>
 				<tr>
 					<th>작성날짜</th>
