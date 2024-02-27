@@ -80,7 +80,7 @@ public class UsrMemberController {
 		if (afterLoginUri.length() > 0) {
 			return Ut.jsReplace("S-1", Ut.f("%s님 환영합니다", member.getNickname()), afterLoginUri);
 		}
-		
+
 		return Ut.jsReplace("S-1", Ut.f("%s님 환영합니다", member.getNickname()), "/");
 	}
 
@@ -129,10 +129,16 @@ public class UsrMemberController {
 
 		return Ut.jsReplace(joinRd.getResultCode(), joinRd.getMsg(), "../member/login");
 	}
-	
+
 	@RequestMapping("/usr/member/myPage")
 	public String showMyPage() {
 
 		return "usr/member/myPage";
+	}
+
+	@RequestMapping("/usr/member/checkPw")
+	public String showCheckPw() {
+
+		return "usr/member/checkPw";
 	}
 }
