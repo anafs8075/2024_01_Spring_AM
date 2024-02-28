@@ -49,7 +49,7 @@ public class UsrReplyController {
 		return Ut.jsReplace(writeReplyRd.getResultCode(), writeReplyRd.getMsg(), "../article/detail?id=" + relId);
 
 	}
-	
+
 	@RequestMapping("/usr/reply/doDelete")
 	@ResponseBody
 	public String doDelete(HttpServletRequest req, int id, String replaceUri) {
@@ -77,13 +77,12 @@ public class UsrReplyController {
 
 		return Ut.jsReplace(loginedMemberCanDeleteRd.getResultCode(), loginedMemberCanDeleteRd.getMsg(), replaceUri);
 	}
-	
+
 	@RequestMapping("/usr/reply/doModify")
 	@ResponseBody
 	public String doModify(HttpServletRequest req, int id, String body) {
 		System.err.println(id);
 		System.err.println(body);
-
 		Rq rq = (Rq) req.getAttribute("rq");
 
 		Reply reply = replyService.getReply(id);
@@ -97,9 +96,10 @@ public class UsrReplyController {
 		if (loginedMemberCanModifyRd.isSuccess()) {
 			replyService.modifyReply(id, body);
 		}
+
 		reply = replyService.getReply(id);
 
 		return reply.getBody();
-	}	
+	}
 
 }

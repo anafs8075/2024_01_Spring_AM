@@ -33,10 +33,9 @@ public class UsrArticleController {
 
 	@Autowired
 	private BoardService boardService;
-	
+
 	@Autowired
 	private ReplyService replyService;
-
 
 	@Autowired
 	private ReactionPointService reactionPointService;
@@ -90,13 +89,12 @@ public class UsrArticleController {
 		Rq rq = (Rq) req.getAttribute("rq");
 
 		Article article = articleService.getForPrintArticle(rq.getLoginedMemberId(), id);
-
 		ResultData usersReactionRd = reactionPointService.usersReaction(rq.getLoginedMemberId(), "article", id);
 
 		if (usersReactionRd.isSuccess()) {
 			model.addAttribute("userCanMakeReaction", usersReactionRd.isSuccess());
 		}
-		
+
 		List<Reply> replies = replyService.getForPrintReplies(rq.getLoginedMemberId(), "article", id);
 
 		int repliesCount = replies.size();
@@ -193,7 +191,6 @@ public class UsrArticleController {
 
 		return Ut.jsReplace(loginedMemberCanModifyRd.getResultCode(), loginedMemberCanModifyRd.getMsg(),
 				"../article/detail?id=" + id);
-		
 	}
 
 	// 로그인 체크 -> 유무 체크 -> 권한 체크 -> 삭제
